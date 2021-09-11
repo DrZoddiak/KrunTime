@@ -22,7 +22,7 @@ repositories {
 
 sponge {
     apiVersion("8.0.0-SNAPSHOT")
-    license("CHANGEME")
+    license("https://github.com/pie-flavor/spotlin/blob/master/LICENSE")
     loader {
         name(PluginLoaders.JAVA_PLAIN)
         version("1.0")
