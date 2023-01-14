@@ -12,7 +12,7 @@ val spongeVersion: String = "8.0.0-SNAPSHOT"
 val kotlinVersion: String = "1.8.0"
 
 group = "me.zodd"
-version = "0.1.0"
+version = "0.4.0"
 
 repositories {
     mavenCentral()
