@@ -2,40 +2,38 @@ import org.spongepowered.gradle.plugin.config.PluginLoaders
 import org.spongepowered.plugin.metadata.model.PluginDependency
 
 plugins {
-    kotlin("jvm") version "1.4.21"
-    id("com.github.johnrengelman.shadow") version "7.0.0"
-    id("org.spongepowered.gradle.plugin") version "2.0.0"
-    id("flavor.pie.promptsign") version "1.1.0"
+    kotlin("jvm") version "1.8.0"
+    kotlin("plugin.serialization") version "1.8.0"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("org.spongepowered.gradle.plugin") version "2.1.1"
 }
 
-val spongeVersion: String by project
-val kotlinVersion: String by project
-val pluginGroup: String by project
-val pluginVersion: String by project
+val spongeVersion: String = "8.0.0-SNAPSHOT"
+val kotlinVersion: String = "1.8.0"
 
-group = pluginGroup
-version = pluginVersion
+group = "me.zodd"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
 }
 
 sponge {
-    apiVersion("8.0.0-SNAPSHOT")
-    license("https://github.com/pie-flavor/spotlin/blob/master/LICENSE")
+    apiVersion(spongeVersion)
+    license("CHANGEME")
     loader {
         name(PluginLoaders.JAVA_PLAIN)
         version("1.0")
     }
-    plugin("spotlin") {
-        displayName("Soulbound")
-        entrypoint("io.github.pxlpowered.spotlin.Spotlin")
-        version(project.version as String?)
+    plugin("kruntime") {
+        displayName("KrunTime")
+        entrypoint("me.zodd.kruntime.KrunTime")
+        version(project.version as String)
         description("Provides the Kotlin runtime for other plugins.")
         links {
-            homepage("https://github.com/pie-flavor/spotlin")
-            source("https://github.com/pie-flavor/spotlin")
-            issues("https://github.com/pie-flavor/spotlin/issues")
+            homepage("https://github.com/DrZoddiak/kruntime")
+            source("https://github.com/DrZoddiak/kruntime")
+            issues("https://github.com/DrZoddiak/kruntime/issues")
         }
         dependency("spongeapi") {
             loadOrder(PluginDependency.LoadOrder.AFTER)
@@ -51,10 +49,10 @@ dependencies {
     val reflect = create(kotlin("reflect"))
     api(reflect)
     shadow(reflect)
-    val coroutines = create("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.0-M2")
+    val coroutines = create("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     api(coroutines)
     shadow(coroutines)
-    val serialization = create("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.1")
+    val serialization = create("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
     api(serialization)
     shadow(serialization)
 }
@@ -83,6 +81,3 @@ artifacts {
     archives(tasks.shadowJar.get())
 }
 
-tasks.signArchives {
-    dependsOn(tasks.shadowJar.get())
-}

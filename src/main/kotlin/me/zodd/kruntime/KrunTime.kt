@@ -21,26 +21,23 @@
  * THE SOFTWARE.
  */
 
-package io.github.pxlpowered.spotlin
+package me.zodd.kruntime
 
 import com.google.inject.Inject
 import org.apache.logging.log4j.Logger
 import org.spongepowered.api.event.Listener
 import org.spongepowered.api.event.lifecycle.ConstructPluginEvent
 import org.spongepowered.plugin.PluginContainer
-import org.spongepowered.plugin.builtin.jvm.Plugin
 
-@Suppress("UNUSED_PARAMETER")
-@Plugin("spotlin")
-class Spotlin @Inject internal constructor(private val container: PluginContainer, private val logger: Logger) {
+class KrunTime @Inject internal constructor(private val container: PluginContainer, private val logger: Logger) {
 
     @Listener
-    fun onPreInit(e: ConstructPluginEvent) {
+    fun constructPlugin(e: ConstructPluginEvent) {
         logger.info("=====================")
         logger.info("Using {} v{}, providing kotlin v{}",
         container.metadata().id(),
         container.metadata().version(),
-        "1.3.0")
+        "1.8.0")
         logger.info("=====================")
     }
 
